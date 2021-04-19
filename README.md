@@ -1,4 +1,8 @@
-# simpleicons
+<h1>
+  <img src="logo.svg" alt="create-logo Logo" width="50" height="50">
+  simpleicons
+</h1>
+
 Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version (all lowercase and no spaces with some exceptions) must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package searches for icons by filename.
 
 ## Installation
