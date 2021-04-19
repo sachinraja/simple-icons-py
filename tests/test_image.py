@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from simpleicons.icon_xml import get_xml_bytes
 from simpleicons.image import icon_to_image
+
 
 def test_download_github_image():
     xml_bytes = get_xml_bytes("gItHub", fill="blue")
@@ -9,4 +12,4 @@ def test_download_github_image():
 
     # manipulate PIL Image - very transparent
     img.putalpha(32)
-    img.save("github.png")
+    img.save(Path("tests", "github.png"))

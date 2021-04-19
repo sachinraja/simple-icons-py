@@ -133,3 +133,6 @@ dmypy.json
 # generated files
 simpleicons/icons/*.py
 simpleicons/all.py
+
+tests/**/*
+!tests/**/*.py

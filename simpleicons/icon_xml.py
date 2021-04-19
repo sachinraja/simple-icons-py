@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 ET.register_namespace("", "http://www.w3.org/2000/svg")
 
+
 def get_str(icon_name: str) -> str:
     """Read an icon's svg file.
 
@@ -15,6 +16,7 @@ def get_str(icon_name: str) -> str:
     with open(f"simpleicons/icons/{icon_name.lower()}.svg", "r") as f:
         return f.read()
 
+
 def get_et(icon_name: str) -> ET:
     """Get an icon's element tree (parsed XML).
 
@@ -27,24 +29,26 @@ def get_et(icon_name: str) -> ET:
 
     return ET.parse(f"simpleicons/icons/{icon_name.lower()}.svg")
 
+
 def get_xml(icon_name: str, **attrs) -> ET:
     """Add attributes to an icon's svg element.
 
     Args:
         icon_name (str): The name of an icon.
         **attrs: The attributes to add to the svg element.
-    
+
     Returns:
         xml.etree.ElementTree: An icon's parsed XML with the attributes.
     """
 
     tree = get_et(icon_name)
     svg = tree.getroot()
-    
+
     for attrName, attrValue in attrs.items():
         svg.set(attrName, attrValue)
-    
+
     return tree
+
 
 def get_xml_bytes(icon_name: str, **attrs) -> bytes:
     """Get an icon's bytes.

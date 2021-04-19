@@ -8,7 +8,9 @@ from svglib.svglib import svg2rlg
 from simpleicons.icon_xml import get_xml_bytes
 
 
-def icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image:
+def icon_to_image(
+    icon_xml: bytes, bg: int = 0xFFFFFF, scale: Tuple[int, int] = (1, 1)
+) -> Image:
     """Convert icon to PIL image.
 
     Args:
