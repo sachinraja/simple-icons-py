@@ -3,7 +3,69 @@ Use a wide-range of icons derived from the [simple-icons](https://github.com/sim
 
 ## Installation
 Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons (a couple of megabytes).
-## XML
+
+## Usage
+### General Usage
+The API can then be used as follows, where [ICON SLUG] is replaced by a slug:
+```py
+from simpleicons.all import icons
+
+# Get a specific icon by its slug as:
+icons.get('[ICON SLUG]');
+
+# For example:
+icon = icons.get('simpleicons');
+
+print(icon.__dict__);
+
+"""
+{
+    'title': 'Simple Icons',
+    'slug': 'simpleicons',
+    'hex': '111111',
+    'source': 'https://simpleicons.org/',
+    'svg': '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">...</svg>',
+    'path': 'M12 12v-1.5c-2.484 ...',
+    'guidelines': 'https://simpleicons.org/styleguide',
+    'license': {
+        type: '...',
+        url: 'https://example.com/'
+    }
+}
+"""
+```
+NOTE: The `guidelines` entry will be `None` if we do not yet have guidelines data for the icon.
+
+NOTE: The `license` entry will be `None` if we do not yet have license data for the icon.
+
+Alternatively you can import the needed icons individually, where [ICON SLUG] is replaced by a slug:
+```py
+# Import a specific icon by its slug as:
+from simpleicons.icons.[ICON SLUG] import icon
+
+# For example:
+from simpleicons.icons.simpleicons import icon
+
+console.log(icon);
+```
+NOTE: If the icon's slug is not compatible with python imports (e.g. it has a dash) you must use importlib to import it:
+```py
+importlib.import_module('simpleicons.icons.[ICON SLUG]').icon
+
+# For example:
+importlib.import_module('simpleicons.icons.dot-net').icon
+```
+
+Lastly, the `icons` object is also enumerable. This is useful if you want to do a computation on every icon:
+```py
+from simpleicons.all import icons
+
+for (key, icon in icons) {
+    # do stuff
+}
+```
+
+### XML
 The XML for each icon can be easily manipulated with either of two functions:
 
 `get_xml(icon_name: str, **attrs) -> ElementTree`
@@ -33,7 +95,7 @@ get_str("github")
 
 This string representation will allow for quick implementation in web pages, however it cannot be manipulated. Use `get_xml_bytes` for easy web page implementation alongside manipulation.
 
-## Image
+### Image
 Icons can be converted to PIL Images with `icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image`:
 
 ```py

@@ -1,0 +1,1 @@
+Icon(title='{title}', slug='{slug}', hex='{hex}', source='{source}', svg="""{svg}""", guidelines={guidelines}, license={license})

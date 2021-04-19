@@ -1,9 +1,12 @@
-from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM
-from PIL import Image
-from simpleicons.icon_xml import get_xml_bytes
 from io import BytesIO
 from typing import Tuple
+
+from PIL import Image
+from reportlab.graphics import renderPM
+from svglib.svglib import svg2rlg
+
+from simpleicons.icon_xml import get_xml_bytes
+
 
 def icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image:
     """Convert icon to PIL image.
