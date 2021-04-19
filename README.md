@@ -11,12 +11,12 @@ The API can then be used as follows, where [ICON SLUG] is replaced by a slug:
 from simpleicons.all import icons
 
 # Get a specific icon by its slug as:
-icons.get('[ICON SLUG]');
+icons.get('[ICON SLUG]')
 
 # For example:
-icon = icons.get('simpleicons');
+icon = icons.get('simpleicons')
 
-print(icon.__dict__);
+print(icon.__dict__)
 
 """
 {
@@ -46,10 +46,12 @@ from simpleicons.icons.[ICON SLUG] import icon
 # For example:
 from simpleicons.icons.simpleicons import icon
 
-console.log(icon);
+print(icon)
 ```
 NOTE: If the icon's slug is not compatible with python imports (e.g. it has a dash) you must use importlib to import it:
 ```py
+import importlib
+
 importlib.import_module('simpleicons.icons.[ICON SLUG]').icon
 
 # For example:
