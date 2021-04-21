@@ -3,7 +3,7 @@
   simpleicons
 </h1>
 
-Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version (all lowercase and no spaces with some exceptions) must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package searches for icons by filename.
+Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.20.0](https://github.com/simple-icons/simple-icons/releases/tag/4.20.0).
 
 ## Installation
 Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons (a couple of megabytes).

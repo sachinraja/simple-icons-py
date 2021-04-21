@@ -5,7 +5,7 @@ from pathlib import Path
 from simpleicons.icon import License
 from scripts.utils import get_icon_slug, title_to_slug
 
-data_file = Path("simpleicons", "_data", "simple-icons.json")
+data_file = Path("scripts", "_data", "simple-icons.json")
 index_file = Path("simpleicons", "all.py")
 icons_dir = Path("simpleicons", "icons")
 
