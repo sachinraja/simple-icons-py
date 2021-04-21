@@ -1,9 +1,11 @@
 <h1>
-  <img src="logo.svg" alt="create-logo Logo" width="50" height="50">
+  <img src="logo.svg" alt="Logo" width="50" height="50">
   simpleicons
 </h1>
 
-Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.20.0](https://github.com/simple-icons/simple-icons/releases/tag/4.20.0).
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.20.0](https://github.com/simple-icons/simple-icons/releases/tag/4.20.0). It does **not** depend on the filesystem.
 
 ## Installation
 Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons (a couple of megabytes).
