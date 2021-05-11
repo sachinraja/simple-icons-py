@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "simpleicons"
-version = "4.20.2"
+version = "4.21"
 description = "Use a wide-range of icons derived from the simple-icons/simple-icons repo in python."
 authors = ["Sachin Raja <sachinraja2349@gmail.com>"]
 license = "MIT"
 include = ["simpleicons/icons/*", "simpleicons/all.py"]
 readme = "README.md"
+repository="https://github.com/xCloudzx/simpleicons"
 
 [tool.poetry.scripts]
 generate = "scripts.build_package:build"
