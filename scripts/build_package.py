@@ -1,5 +1,7 @@
 import json
 import re
+import os
+import shutil
 from pathlib import Path
 
 from simpleicons.icon import License
@@ -7,6 +9,8 @@ from scripts.utils import get_icon_slug, title_to_slug
 
 data_file = Path("scripts", "_data", "simple-icons.json")
 index_file = Path("simpleicons", "all.py")
+
+simple_icons_dir = Path("simple-icons", "icons")
 icons_dir = Path("simpleicons", "icons")
 
 index_template_file = Path("scripts", "templates", "all.py")
@@ -63,6 +67,8 @@ def icon_to_object(icon):
 
 
 def build():
+    shutil.copytree(simple_icons_dir, icons_dir)
+
     icons = []
     for icon in data["icons"]:
         filename = get_icon_slug(icon)
