@@ -10,6 +10,8 @@ repository="https://github.com/xCloudzx/simpleicons"
 
 [tool.poe.tasks]
 test = "poetry run pytest tests"
+"lint" = "poetry run black . --check"
+"lint:fix" = "poetry run black ."
 generate = { script = "scripts.build_package:build" }
 
 [tool.poetry.dependencies]

@@ -5,9 +5,10 @@ from pathlib import Path
 from simpleicons.icon import License
 from scripts.utils import get_icon_slug, title_to_slug
 
-data_file = Path("scripts", "_data", "simple-icons.json")
+data_file = Path("simple-icons", "_data", "simple-icons.json")
 index_file = Path("simpleicons", "all.py")
 icons_dir = Path("simpleicons", "icons")
+simpleicons_source_dir = Path("simple-icons", "icons")
 
 index_template_file = Path("scripts", "templates", "all.py")
 icon_object_template_file = Path("scripts", "templates", "icon_object.py")
@@ -63,10 +64,12 @@ def icon_to_object(icon):
 
 
 def build():
+    # create icons_dir if it does not exist
+    icons_dir.mkdir(exist_ok=True)
     icons = []
     for icon in data["icons"]:
         filename = get_icon_slug(icon)
-        svg_filepath = Path(icons_dir, f"{filename}.svg")
+        svg_filepath = Path(simpleicons_source_dir, f"{filename}.svg")
 
         with open(svg_filepath, "r") as f:
             icon["svg"] = re.sub("/\r?\n/", "", f.read())

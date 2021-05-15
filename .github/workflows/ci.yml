@@ -8,20 +8,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Checkout submodules
+        uses: textbook/git-checkout-submodule-action@master
 
       - name: Setup Python 3.8.x
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      
+
       - name: Install Poetry
         uses: snok/install-poetry@v1.1.4
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-      
+
       # load cached venv if cache exists
       - name: Load cached venv
         id: cached-poetry-dependencies
@@ -29,7 +32,7 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-      
+
       # install dependencies if cache does not exist
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
@@ -39,10 +42,10 @@ jobs:
       - name: Install library
         run: |
           poetry install --no-interaction
-          poetry run generate
+          poe generate
 
       - name: Run tests
-        run: poetry run pytest tests
-      
+        run: poe test
+
       - name: Run linter
-        run: poetry run black . --check
+        run: poe lint

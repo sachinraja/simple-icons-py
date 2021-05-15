@@ -131,7 +131,7 @@ dmypy.json
 .vscode/
 
 # generated files
-simpleicons/icons/*.py
+simpleicons/icons
 simpleicons/all.py
 
 tests/**/*

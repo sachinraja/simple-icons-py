@@ -8,14 +8,11 @@ def title_to_slug(title: str):
 
     # before normalize
     slug = sub_replacements_list(
+        slug,
         [
             (r"\+", "plus", re.DOTALL),
-            (r"^\.", "dot-", re.DOTALL),
-            (r"\.$", "-dot"),
-            (r"\.", "-dot-", re.DOTALL),
-            (r"^&", "and-"),
-            (r"&$", "-and"),
-            (r"&", "-and-", re.DOTALL),
+            (r"\.", "dot", re.DOTALL),
+            (r"&", "and", re.DOTALL),
             (r"đ", "d", re.DOTALL),
             (r"ħ", "h", re.DOTALL),
             (r"ı", "i", re.DOTALL),
@@ -25,18 +22,16 @@ def title_to_slug(title: str):
             (r"ß", "ss", re.DOTALL),
             (r"ŧ", "t", re.DOTALL),
         ],
-        slug,
     )
 
     slug = normalize("NFD", slug)
 
     # after normalize
     slug = sub_replacements_list(
+        slug,
         [
-            (r"[\u0300-\u036f]", "", re.DOTALL),
             (r"[^a-z0-9\-]", "", re.DOTALL),
         ],
-        slug,
     )
 
     return slug
@@ -50,13 +45,13 @@ def get_icon_slug(icon):
 
 
 def sub_replacements_list(
-    replacements: List[Tuple[str, str, re.RegexFlag]], value: str
+    value: str, replacements: List[Tuple[str, str, re.RegexFlag]]
 ):
     """Calls re.sub on multiple replacements.
 
     Args:
-        replacements (List[Tuple[str, str]]): A list of an old and new pattern for replacement.
         value (str): The string to apply the replacements to.
+        replacements (List[Tuple[str, str]]): A list of an old and new pattern for replacement.
     """
 
     new_value = value
