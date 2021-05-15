@@ -41,11 +41,11 @@ jobs:
       # Install this package (root)
       - name: Install library
         run: |
-          poetry install --no-interaction
-          poe generate
+          poetry install -E imaging --no-interaction
+          poetry run poe generate
 
       - name: Run tests
-        run: poe test
+        run: poetry run poe test
 
       - name: Run linter
-        run: poe lint
+        run: poetry run poe lint
