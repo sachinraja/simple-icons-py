@@ -8,18 +8,23 @@ include = ["simpleicons/icons/*", "simpleicons/all.py"]
 readme = "README.md"
 repository="https://github.com/xCloudzx/simpleicons"
 
-[tool.poetry.scripts]
-generate = "scripts.build_package:build"
+[tool.poe.tasks]
+test = "poetry run pytest tests"
+generate = { script = "scripts.build_package:build" }
 
 [tool.poetry.dependencies]
 python = "^3.8"
-reportlab = "^3.5.67"
-Pillow = "^8.2.0"
-svglib = "^1.1.0"
+reportlab = { version = "^3.5.67", optional = true }
+Pillow = { version = "^8.2.0", optional = true }
+svglib = { version = "^1.1.0", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.3"
 black = "^20.8b1"
+poethepoet = "^0.10.0"
+
+[tool.poetry.extras]
+imaging = ["reportlab", "Pillow", "svglib"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -5,10 +5,10 @@
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.20.0](https://github.com/simple-icons/simple-icons/releases/tag/4.20.0). It does **not** depend on the filesystem.
+Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.21.0](https://github.com/simple-icons/simple-icons/releases/tag/4.20.0). It does **not** depend on the filesystem.
 
 ## Installation
-Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons (a couple of megabytes).
+Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons.
 
 ## Usage
 ### General Usage
@@ -76,43 +76,33 @@ for (key, icon in icons) {
 ### XML
 The XML for each icon can be easily manipulated with either of two functions:
 
-`get_xml(icon_name: str, **attrs) -> ElementTree`
+`Icon.get_xml(**attrs) -> ElementTree`
 
 ```py
-from simpleicons.icon_xml import get_xml
+from simpleicons.icons.simpleicons import icon
 
-# blue logo (simply adds <svg fill="blue"></svg>)
-get_xml("github", fill="blue")
+# blue logo, adds the fill attribute: <svg fill="blue"></svg>
+icon.get_xml(fill="blue")
 ```
 
-`get_xml_bytes(icon_name: str, **attrs) -> bytes`
+`Icon.get_xml_bytes(**attrs) -> bytes`
 
 ```py
-from simpleicons.icon_xml import get_xml_bytes
+from simpleicons.icons.simpleicons import icon
 
-get_xml_bytes("github", fill="blue")
+icon.get_xml_bytes(fill="blue")
 ```
-
-To simply get the unparsed XML string for each icon, use `get_str(icon_name: str) -> str`:
-
-```py
-from simpleicons.icon_xml import get_str
-
-get_str("github")
-```
-
-This string representation will allow for quick implementation in web pages, however it cannot be manipulated. Use `get_xml_bytes` for easy web page implementation alongside manipulation.
 
 ### Image
-Icons can be converted to PIL Images with `icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image`:
+In order to use this, you must install the extras: `pip install -e simpleicons[imaging]` . Icons can be converted to PIL Images with `icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image`:
 
 ```py
-from simpleicons.icon_xml import get_xml_bytes
+from simpleicons.icons.simpleicons import icon
 from simpleicons.image import icon_to_image
 
-xml_bytes = get_xml_bytes("github", fill="blue")
+xml_bytes = icon.get_xml_bytes(fill="blue")
 
-# black background and x5 scale
+# black background and 5x scale
 img = icon_to_image(xml_bytes, bg=0x000000, scale=(5, 5))
 
 # manipulate PIL Image
