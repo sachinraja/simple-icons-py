@@ -1,0 +1,28 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: local
+    hooks:
+    -   id: install-library
+        name: install library
+        language: system
+        pass_filenames: false
+        entry: poetry install -E imaging --no-interaction
+
+    -   id: generate
+        name: generate icons
+        language: system
+        pass_filenames: false
+        entry: poe generate
+
+    -   id: lint
+        name: lint
+        language: system
+        pass_filenames: false
+        entry: poe lint
+        
+    -   id: test
+        name: test
+        language: system
+        pass_filenames: false
+        entry: poe test

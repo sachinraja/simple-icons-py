@@ -1,16 +1,13 @@
 # yes, this is quite confusing
 import importlib
 
-from simpleicons.icon import Icon
-from simpleicons.icons.simpleicons import icon as simple_icon
-
-# cannot import with "-" in filename
-dot_net: Icon = importlib.import_module("simpleicons.icons.dot-net").icon
+from simpleicons.icons.simpleicons import simpleicons_icon
+from simpleicons.icons.dotnet import dotnet_icon
 
 
 def test_simpleicons():
-    assert simple_icon.title == "Simple Icons"
+    assert simpleicons_icon.title == "Simple Icons"
 
 
 def test_dot_net():
-    assert dot_net.title == ".NET"
+    assert dotnet_icon.title == ".NET"

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simpleicons"
-version = "4.22.1"
+version = "5.2.0"
 description = "Use a wide-range of icons derived from the simple-icons/simple-icons repo in python."
 authors = ["Sachin Raja <sachinraja2349@gmail.com>"]
 license = "MIT"
@@ -18,14 +18,15 @@ build = ["generate", "_build"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-reportlab = { version = "^3.5.67", optional = true }
-Pillow = { version = "^8.2.0", optional = true }
-svglib = { version = "^1.1.0", optional = true }
+reportlab = {version = "^3.5.67", optional = true}
+Pillow = {version = "^8.2.0", optional = true}
+svglib = {version = "^1.1.0", optional = true}
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.3"
-black = "^20.8b1"
+pytest = "^6.2.4"
+black = "^21.6b0"
 poethepoet = "^0.10.0"
+pre-commit = "^2.13.0"
 
 [tool.poetry.extras]
 imaging = ["reportlab", "Pillow", "svglib"]

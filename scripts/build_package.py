@@ -1,5 +1,6 @@
 import json
 import re
+import shutil
 from pathlib import Path
 
 from simpleicons.icon import License
@@ -31,19 +32,15 @@ def escape(value: str):
 
 
 def icon_to_key_value(icon):
-    icon_name = escape(icon["title"])
-    if not icon["slug"] == title_to_slug(icon["title"]):
-        icon_name = icon["slug"]
-
-    return f"'{icon_name}': {icon_to_object(icon)}"
+    slug = icon["slug"]
+    return f"'{slug}': {icon_to_object(icon)}"
 
 
 def license_to_object(license: License):
-    new_license = license
-    if not "url" in new_license:
-        new_license["url"] = f"https://spdx.org/licenses/{new_license['type']}"
+    if not "url" in license:
+        license["url"] = f"https://spdx.org/licenses/{license['type']}"
 
-    return new_license
+    return license
 
 
 def icon_to_object(icon):
@@ -55,31 +52,33 @@ def icon_to_object(icon):
     if type(icon["guidelines"]) == str:
         icon["guidelines"] = f"'{icon['guidelines']}'"
 
-    license = None
-    if "license" in icon:
-        license = license_to_object(icon["license"])
+    icon["license"] = license_to_object(icon["license"]) if "license" in icon else None
 
-    icon["license"] = license
     return icon_object_template.format(**icon)
 
 
 def build():
-    # create icons_dir if it does not exist
-    icons_dir.mkdir(exist_ok=True)
+    # reset build
+    if icons_dir.exists() and icons_dir.is_dir():
+        shutil.rmtree(icons_dir)
+
+    icons_dir.mkdir()
+
     icons = []
     for icon in data["icons"]:
-        filename = get_icon_slug(icon)
-        svg_filepath = Path(simpleicons_source_dir, f"{filename}.svg")
+        icon["slug"] = get_icon_slug(icon)
+        svg_filepath = Path(simpleicons_source_dir, f"{icon['slug']}.svg")
 
         with open(svg_filepath, "r") as f:
             icon["svg"] = re.sub("/\r?\n/", "", f.read())
 
-        icon["slug"] = filename
         icons.append(icon.copy())
 
-        py_filepath = Path(icons_dir, f"{filename}.py")
+        py_filepath = Path(icons_dir, f"{icon['slug']}.py")
         with open(py_filepath, "w") as f:
-            f.write("from simpleicons.icon import Icon\nicon= " + icon_to_object(icon))
+            f.write(
+                f"from simpleicons.icon import Icon\n{icon['slug']}_icon= {icon_to_object(icon)}"
+            )
 
     raw_init_py = index_template.format(
         icons=str.join(",\n", [icon_to_key_value(icon) for icon in icons])

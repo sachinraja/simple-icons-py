@@ -5,14 +5,18 @@
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v4.23.0](https://github.com/simple-icons/simple-icons/releases/tag/4.23.0). It does **not** depend on the filesystem.
+Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v5.2.0](https://github.com/simple-icons/simple-icons/releases/tag/5.2.0). It does **not** depend on the filesystem.
 
 ## Installation
+
 Install with `pip install simpleicons`. Keep in mind that this is a fairly large package due to all the icons.
 
 ## Usage
+
 ### General Usage
+
 The API can then be used as follows, where [ICON SLUG] is replaced by a slug:
+
 ```py
 from simpleicons.all import icons
 
@@ -40,31 +44,23 @@ print(icon.__dict__)
 }
 """
 ```
+
 NOTE: The `guidelines` entry will be `None` if we do not yet have guidelines data for the icon.
 
 NOTE: The `license` entry will be `None` if we do not yet have license data for the icon.
 
 Alternatively you can import the needed icons individually, where [ICON SLUG] is replaced by a slug:
+
 ```py
 # Import a specific icon by its slug as:
-from simpleicons.icons.[ICON SLUG] import icon
+from simpleicons.icons.[ICON SLUG] import [ICON_SLUG]_icon
 
 # For example:
-from simpleicons.icons.simpleicons import icon
-
-print(icon)
-```
-NOTE: If the icon's slug is not compatible with python imports (e.g. it has a dash) you must use importlib to import it:
-```py
-import importlib
-
-importlib.import_module('simpleicons.icons.[ICON SLUG]').icon
-
-# For example:
-importlib.import_module('simpleicons.icons.dot-net').icon
+from simpleicons.icons.simpleicons import simpleicons_icon
 ```
 
 Lastly, the `icons` object is also enumerable. This is useful if you want to do a computation on every icon:
+
 ```py
 from simpleicons.all import icons
 
@@ -74,38 +70,40 @@ for (key, icon in icons) {
 ```
 
 ### XML
+
 The XML for each icon can be easily manipulated with either of two functions:
 
 `Icon.get_xml(**attrs) -> ElementTree`
 
 ```py
-from simpleicons.icons.simpleicons import icon
+from simpleicons.icons.simpleicons import simpleicons_icon
 
 # blue logo, adds the fill attribute: <svg fill="blue"></svg>
-icon.get_xml(fill="blue")
+simpleicons_icon.get_xml(fill="blue")
 ```
 
 `Icon.get_xml_bytes(**attrs) -> bytes`
 
 ```py
-from simpleicons.icons.simpleicons import icon
+from simpleicons.icons.simpleicons import simpleicons_icon
 
-icon.get_xml_bytes(fill="blue")
+simpleicons_icon.get_xml_bytes(fill="blue")
 ```
 
 ### Image
+
 In order to use this, you must install the extras: `pip install -e simpleicons[imaging]` . Icons can be converted to PIL Images with `icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image`:
 
 ```py
-from simpleicons.icons.simpleicons import icon
+from simpleicons.icons.simpleicons import simpleicons_icon
 from simpleicons.image import icon_to_image
 
-xml_bytes = icon.get_xml_bytes(fill="blue")
+xml_bytes = simpleicons_icon.get_xml_bytes(fill="blue")
 
 # black background and 5x scale
 img = icon_to_image(xml_bytes, bg=0x000000, scale=(5, 5))
 
 # manipulate PIL Image
 img.putalpha(32)
-img.save("github.png")
+img.save("simpleicons_blue.png")
 ```

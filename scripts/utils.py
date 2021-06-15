@@ -30,7 +30,7 @@ def title_to_slug(title: str):
     slug = sub_replacements_list(
         slug,
         [
-            (r"[^a-z0-9\-]", "", re.DOTALL),
+            (r"[^a-z0-9]", "", re.DOTALL),
         ],
     )
 
@@ -38,10 +38,7 @@ def title_to_slug(title: str):
 
 
 def get_icon_slug(icon):
-    if "slug" in icon:
-        return icon["slug"]
-
-    return title_to_slug(icon["title"])
+    return icon["slug"] if "slug" in icon else title_to_slug(icon["title"])
 
 
 def sub_replacements_list(
