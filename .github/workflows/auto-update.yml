@@ -1,9 +1,11 @@
-name: ci
+name: auto update
 
-on: [push]
+on:
+  schedule:
+    - cron:  '0 0 * * 0'
 
 jobs:
-  test:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +26,6 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      # load cached venv if cache exists
       - name: load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v2
@@ -32,19 +33,12 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      # install dependencies if cache does not exist
       - name: install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
 
-      # Install this package (root)
       - name: install library
-        run: |
-          poetry install -E imaging --no-interaction
-          poetry run poe generate
-
-      - name: run tests
-        run: poetry run poe test
-
-      - name: run linter
-        run: poetry run poe lint
+        run: poetry install -E auto-update --no-interaction
+      
+      - name: run auto update
+        run: poetry run python scripts/auto-update.py
