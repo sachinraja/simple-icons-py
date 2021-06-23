@@ -44,5 +44,5 @@ jobs:
 
       - name: run auto update
         run: |
-          ls -l
+          ls -al
           poetry run python scripts/auto-update.py
