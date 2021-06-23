@@ -28,25 +28,38 @@ print(current_si_version, new_si_version)
 
 # do not attempt to update if major versions do not match
 if current_si_version.major != new_si_version.major:
+    print("Next update is major, exiting.")
     exit(1)
 
 # version is lower - exit
 if new_si_version < current_si_version:
+    print("Already on latest version.")
     exit()
 
 # update submodule
 repo = git.Repo(os.getcwd())
 si_submodule = repo.submodule("simple-icons")
 si_submodule.module().git.checkout(new_si_version_str)
-
-
-repo.git.add(si_submodule.path)
-repo.index.commit(f"chore: update simple-icons to {new_si_version_str}")
-repo.git.push("origin", "main")
-
-# start the build
-build()
+print(f"Checked out branch {new_si_version_str} of simple-icons in submodule.")
 
 subprocess.call(["poetry", "version", new_si_version_str])
+print("Bumped package version.")
+
+repo.git.add(si_submodule.path)
+repo.git.add(Path("pyproject.toml"))
+
+repo.index.commit(f"chore: update simple-icons to {new_si_version_str}")
+print("Commited updates.")
+
+repo.git.push("origin", "main")
+print("Pushed updates to origin.")
+
+
+# start the build
+print("Generating lib...")
+build()
+print("Finished generating.")
+
+print("Begin package publish steps.")
 subprocess.call(["poetry", "build"])
 subprocess.call(["poetry", "publish"])
