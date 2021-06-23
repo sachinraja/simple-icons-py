@@ -2,7 +2,8 @@ name: auto update
 
 on:
   schedule:
-    - cron:  '0 0 * * 0'
+    # one hour after simple-icons automatic release
+    - cron:  '1 0 * * 0'
   workflow_dispatch:
 
 jobs:
@@ -42,4 +43,4 @@ jobs:
         run: poetry install -E auto-update --no-interaction
       
       - name: run auto update
-        run: poetry run python scripts/auto-update.py
+        run: sudo poetry run python scripts/auto-update.py
