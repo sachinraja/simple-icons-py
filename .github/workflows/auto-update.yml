@@ -44,5 +44,5 @@ jobs:
 
       - name: run auto update
         run: |
-          l
-          sudo poetry run python scripts/auto-update.py
+          ls -l
+          poetry run python scripts/auto-update.py
