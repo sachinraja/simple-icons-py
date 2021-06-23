@@ -1,6 +1,5 @@
 import json
 import os
-from re import sub
 import subprocess
 from pathlib import Path
 
@@ -51,7 +50,13 @@ repo.git.add(Path("pyproject.toml"))
 repo.index.commit(f"chore: update simple-icons to {new_si_version_str}")
 print("Commited updates.")
 
-repo.git.push("origin", "main")
+tag = repo.create_tag(
+    new_si_version_str,
+    message=f"Updated to [simple-icons {new_si_version_str}](https://github.com/simple-icons/simple-icons/releases/tag/{new_si_version_str})",
+)
+print(f"Created tag {new_si_version_str}.")
+
+repo.git.push("origin", "main", **{"follow-tags": True})
 print("Pushed updates to origin.")
 
 
