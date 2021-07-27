@@ -15,15 +15,13 @@ with open(Path("simple-icons", "package.json"), "r") as f:
 
 current_si_version = semantic_version.Version(current_simple_icons_pkg["version"])
 
-# new_si_pkg = requests.get("https://api.npms.io/v2/package/simple-icons").json()
+new_si_pkg = requests.get("https://api.npms.io/v2/package/simple-icons").json()
 
 new_si_version = semantic_version.Version(
-    # new_si_pkg["collected"]["metadata"]["version"]
-    "5.3.0"
+    new_si_pkg["collected"]["metadata"]["version"]
 )
 
 new_si_version_str = str(new_si_version)
-print(current_si_version, new_si_version)
 
 # do not attempt to update if major versions do not match
 if current_si_version.major != new_si_version.major:
@@ -38,7 +36,10 @@ if new_si_version < current_si_version:
 # update submodule
 repo = git.Repo(os.getcwd())
 si_submodule = repo.submodule("simple-icons")
-si_submodule.module().git.checkout(new_si_version_str)
+si_submodule_repo = si_submodule.module()
+si_submodule_repo.remotes.origin.pull("master")
+si_submodule_repo.git.checkout(new_si_version_str)
+
 print(f"Checked out branch {new_si_version_str} of simple-icons in submodule.")
 
 subprocess.call(["poetry", "version", new_si_version_str])
@@ -56,7 +57,7 @@ tag = repo.create_tag(
 )
 print(f"Created tag {new_si_version_str}.")
 
-repo.git.push("origin", "main", **{"follow-tags": True})
+# repo.git.push("origin", "main", **{"follow-tags": True})
 print("Pushed updates to origin.")
 
 
