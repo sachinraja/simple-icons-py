@@ -9,9 +9,8 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-
-      - name: checkout submodules
-        uses: textbook/git-checkout-submodule-action@master
+        with:
+          submodules: true
 
       - name: setup Python 3.8.x
         uses: actions/setup-python@v2
