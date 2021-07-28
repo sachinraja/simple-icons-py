@@ -57,7 +57,7 @@ tag = repo.create_tag(
 )
 print(f"Created tag {new_si_version_str}.")
 
-# repo.git.push("origin", "main", **{"follow-tags": True})
+repo.git.push("origin", "main", **{"follow-tags": True})
 print("Pushed updates to origin.")
 
 
