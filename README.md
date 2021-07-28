@@ -5,7 +5,7 @@
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses [Simple Icons v5.2.0](https://github.com/simple-icons/simple-icons/releases/tag/5.5.0). It does **not** depend on the filesystem.
+Use a wide-range of icons derived from the [simple-icons](https://github.com/simple-icons/simple-icons) repo in python. Go to [their website](https://simpleicons.org/) for a full list of icons. The slug version must be used for the `icon_name`. The icons folder that accompanies the package has all the files. The package uses the latest verison of [Simple Icons](https://github.com/simple-icons/simple-icons/releases/latest). It does **not** depend on the filesystem.
 
 ## Installation
 
