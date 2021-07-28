@@ -16,6 +16,12 @@ jobs:
         with:
           submodules: true
 
+      - name: configure credentials
+        uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          global: true
+          token: "${{ secrets.GITHUB_TOKEN }}"
+
       - name: setup Python 3.8.x
         uses: actions/setup-python@v2
         with:
