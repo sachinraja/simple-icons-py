@@ -22,10 +22,6 @@ icon_object_template: str = None
 with open(icon_object_template_file, "r") as f:
     icon_object_template = f.read()
 
-data = None
-with open(data_file, "r") as f:
-    data = json.load(f)
-
 
 def escape(value: str):
     return re.sub(r"(?<!\\)'", r"\\'", value, flags=re.DOTALL)
@@ -63,6 +59,11 @@ def build():
         shutil.rmtree(icons_dir)
 
     icons_dir.mkdir()
+
+    data = None
+
+    with open(data_file, "r") as f:
+        data = json.load(f)
 
     icons = []
     for icon in data["icons"]:

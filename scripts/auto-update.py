@@ -37,7 +37,7 @@ if new_si_version < current_si_version:
 repo = git.Repo(os.getcwd())
 si_submodule = repo.submodule("simple-icons")
 si_submodule_repo = si_submodule.module()
-si_submodule_repo.remotes.origin.pull("master")
+si_submodule_repo.remotes.origin.fetch("--tags")
 si_submodule_repo.git.checkout(new_si_version_str)
 
 print(f"Checked out branch {new_si_version_str} of simple-icons in submodule.")
