@@ -48,4 +48,6 @@ jobs:
         run: poetry install -E auto-update --no-interaction
 
       - name: run auto update
+        env:
+          POETRY_PYPI_TOKEN_PYPI: "${{ secrets.POETRY_PYPI_TOKEN_PYPI }}"
         run: poetry run python scripts/auto-update.py

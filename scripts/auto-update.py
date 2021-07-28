@@ -28,8 +28,8 @@ if current_si_version.major != new_si_version.major:
     print("Next update is major, exiting.")
     exit(1)
 
-# version is lower - exit
-if new_si_version < current_si_version:
+# version is lower or equal - exit
+if new_si_version <= current_si_version:
     print("Already on latest version.")
     exit()
 
