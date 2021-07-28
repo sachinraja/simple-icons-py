@@ -54,11 +54,12 @@ print("Commited updates.")
 # reference: https://docs.github.com/en/rest/reference/repos#create-a-release
 requests.post(
     "https://api.github.com/repos/sachinraja/simpleicons/releases",
-    {
+    data={
         "tag_name": new_si_version_str,
         "name": new_si_version_str,
         "body": f"Updated to [simple-icons {new_si_version_str}](https://github.com/simple-icons/simple-icons/releases/tag/{new_si_version_str})",
     },
+    headers={"Authorization": f"token ${os.environ['GITHUB_TOKEN']}"},
 )
 
 print(f"Created release {new_si_version_str}.")

@@ -50,4 +50,5 @@ jobs:
       - name: run auto update
         env:
           POETRY_PYPI_TOKEN_PYPI: "${{ secrets.POETRY_PYPI_TOKEN_PYPI }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: poetry run python scripts/auto-update.py
