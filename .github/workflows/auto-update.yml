@@ -20,6 +20,8 @@ jobs:
         uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           global: true
+          name: github-actions
+          email: github-actions@users.noreply.github.com
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: setup Python 3.8.x
