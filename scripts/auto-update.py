@@ -38,8 +38,8 @@ repo = git.Repo(os.getcwd())
 si_submodule = repo.submodule("simple-icons")
 si_submodule_repo = si_submodule.module()
 si_submodule_repo.remotes.origin.fetch("--tags")
-si_submodule_repo.git.checkout(new_si_version_str)
 
+si_submodule_repo.git.checkout(new_si_version_str)
 print(f"Checked out branch {new_si_version_str} of simple-icons in submodule.")
 
 subprocess.call(["poetry", "version", new_si_version_str])
@@ -51,6 +51,14 @@ repo.git.add(Path("pyproject.toml"))
 repo.index.commit(f"chore: update simple-icons to {new_si_version_str}")
 print("Commited updates.")
 
+
+repo.git.push(
+    "origin",
+    "main",
+)
+print("Pushed updates to origin.")
+
+# create release after pushing to origin
 # reference: https://docs.github.com/en/rest/reference/repos#create-a-release
 requests.post(
     "https://api.github.com/repos/sachinraja/simpleicons/releases",
@@ -61,12 +69,7 @@ requests.post(
     },
     headers={"Authorization": f"token ${os.environ['GITHUB_TOKEN']}"},
 )
-
 print(f"Created release {new_si_version_str}.")
-
-repo.git.push("origin", "main", **{"follow-tags": True})
-print("Pushed updates to origin.")
-
 
 # start the build
 print("Generating lib...")
