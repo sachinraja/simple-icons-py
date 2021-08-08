@@ -15,13 +15,10 @@ with open(Path("simple-icons", "package.json"), "r") as f:
 
 current_si_version = semantic_version.Version(current_simple_icons_pkg["version"])
 
-new_si_pkg = requests.get("https://api.npms.io/v2/package/simple-icons").json()
+new_si_pkg = requests.get("https://registry.npmjs.com/simple-icons").json()
 
-new_si_version = semantic_version.Version(
-    new_si_pkg["collected"]["metadata"]["version"]
-)
-
-new_si_version_str = str(new_si_version)
+new_si_version_str = new_si_pkg["dist-tags"]["latest"]
+new_si_version = semantic_version.Version(new_si_pkg["dist-tags"]["latest"])
 
 # do not attempt to update if major versions do not match
 if current_si_version.major != new_si_version.major:
