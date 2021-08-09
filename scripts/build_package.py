@@ -6,13 +6,15 @@ from pathlib import Path
 from simpleicons.icon import License
 from scripts.utils import get_icon_slug, title_to_slug
 
-data_file = Path("simple-icons", "_data", "simple-icons.json")
+simpleicons_vendor_dir = Path("vendor", "simple-icons")
+data_file = simpleicons_vendor_dir / "_data" / "simple-icons.json"
 index_file = Path("simpleicons", "all.py")
 icons_dir = Path("simpleicons", "icons")
-simpleicons_source_dir = Path("simple-icons", "icons")
+simpleicons_source_dir = simpleicons_vendor_dir / "icons"
 
-index_template_file = Path("scripts", "templates", "all.py")
-icon_object_template_file = Path("scripts", "templates", "icon_object.py")
+templates_dir = Path("scripts", "templates")
+index_template_file = templates_dir / "all.py"
+icon_object_template_file = templates_dir / "icon_object.py"
 
 index_template: str = None
 with open(index_template_file, "r") as f:

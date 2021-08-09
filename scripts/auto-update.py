@@ -10,7 +10,7 @@ import git
 from scripts.build_package import build
 
 current_si_pkg = None
-with open(Path("simple-icons", "package.json"), "r") as f:
+with open(Path("vendor", "simple-icons", "package.json"), "r") as f:
     current_simple_icons_pkg = json.load(f)
 
 current_si_version = semantic_version.Version(current_simple_icons_pkg["version"])
@@ -32,7 +32,7 @@ if new_si_version <= current_si_version:
 
 # update submodule
 repo = git.Repo(os.getcwd())
-si_submodule = repo.submodule("simple-icons")
+si_submodule = repo.submodule("vendor/simple-icons")
 si_submodule_repo = si_submodule.module()
 si_submodule_repo.remotes.origin.fetch("--tags")
 
