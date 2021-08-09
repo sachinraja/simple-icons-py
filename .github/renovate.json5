@@ -1,7 +1,9 @@
 {
-  extends: ['config:base'],
-  automerge: true,
-  major: {
-    automerge: false,
-  },
+  extends: ['config:base', 'schedule:weekly'],
+  packageRules: [
+    {
+      matchUpdateTypes: ['minor', 'patch', 'pin', 'digest'],
+      automerge: true,
+    },
+  ],
 }
