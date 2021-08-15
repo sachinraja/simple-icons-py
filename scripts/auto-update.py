@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 from pathlib import Path
+from time import sleep
 
 import requests
 import semantic_version
@@ -15,7 +16,13 @@ with open(Path("vendor", "simple-icons", "package.json"), "r") as f:
 
 current_si_version = semantic_version.Version(current_simple_icons_pkg["version"])
 
-new_si_pkg = requests.get("https://registry.npmjs.com/simple-icons").json()
+# make request 3 times to hopefully break the cache
+new_si_pkg = None
+request_times = 3
+for num in range(request_times):
+    new_si_pkg = requests.get("https://registry.npmjs.com/simple-icons").json()
+    if num != request_times:
+        sleep(5)
 
 new_si_version_str = new_si_pkg["dist-tags"]["latest"]
 new_si_version = semantic_version.Version(new_si_pkg["dist-tags"]["latest"])
