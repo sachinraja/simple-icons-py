@@ -20,9 +20,9 @@ jobs:
         uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           global: true
-          name: github-actions
-          email: github-actions@users.noreply.github.com
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          name: github-actions[bot]
+          email: 41898282+github-actions[bot]@users.noreply.github.com
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: setup Python 3.8.x
         uses: actions/setup-python@v2
@@ -51,6 +51,6 @@ jobs:
 
       - name: run auto update
         env:
-          POETRY_PYPI_TOKEN_PYPI: '${{ secrets.POETRY_PYPI_TOKEN_PYPI }}'
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: poetry run python scripts/auto-update.py
