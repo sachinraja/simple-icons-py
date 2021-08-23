@@ -2,8 +2,8 @@ name: auto update
 
 on:
   schedule:
-    # one hour after simple-icons automatic release (https://crontab.guru/#0_1_*_*_0)
-    - cron: "0 1 * * 0"
+    # one day after simple-icons release PR is generated (https://crontab.guru/#0_0_*_*_1)
+    - cron: '0 0 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
           global: true
           name: github-actions
           email: github-actions@users.noreply.github.com
-          token: "${{ secrets.GITHUB_TOKEN }}"
+          token: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: setup Python 3.8.x
         uses: actions/setup-python@v2
@@ -51,6 +51,6 @@ jobs:
 
       - name: run auto update
         env:
-          POETRY_PYPI_TOKEN_PYPI: "${{ secrets.POETRY_PYPI_TOKEN_PYPI }}"
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          POETRY_PYPI_TOKEN_PYPI: '${{ secrets.POETRY_PYPI_TOKEN_PYPI }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         run: poetry run python scripts/auto-update.py
