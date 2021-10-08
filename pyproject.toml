@@ -6,7 +6,7 @@ authors = ["Sachin Raja <sachinraja2349@gmail.com>"]
 license = "MIT"
 include = ["simpleicons/icons/*", "simpleicons/all.py"]
 readme = "README.md"
-repository="https://github.com/sachinraja/simpleicons"
+repository="https://github.com/sachinraja/simple-icons-py"
 
 [tool.poe.tasks]
 test = "poetry run pytest tests"

@@ -59,7 +59,7 @@ print("Pushed updates to origin.")
 # create release after pushing to origin
 # reference: https://docs.github.com/en/rest/reference/repos#create-a-release
 requests.post(
-    "https://api.github.com/repos/sachinraja/simpleicons/releases",
+    "https://api.github.com/repos/sachinraja/simple-icons-py/releases",
     json={
         "tag_name": new_si_version_str,
         "name": new_si_version_str,
