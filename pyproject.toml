@@ -28,7 +28,7 @@ GitPython = {version = "^3.1.18", optional = true}
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
 black = "^21.6b0"
-poethepoet = "^0.10.0"
+poethepoet = "^0.11.0"
 pre-commit = "^2.15.0"
 Pillow = "^8.3.1"
 svglib = "^1.1.0"
