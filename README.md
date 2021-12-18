@@ -53,10 +53,10 @@ Alternatively you can import the needed icons individually, where [ICON SLUG] is
 
 ```py
 # Import a specific icon by its slug as:
-from simpleicons.icons.[ICON SLUG] import [ICON_SLUG]_icon
+from simpleicons.icons import si_[ICON_SLUG]
 
 # For example:
-from simpleicons.icons.simpleicons import simpleicons_icon
+from simpleicons.icons import si_simpleicons
 ```
 
 Lastly, the `icons` object is also enumerable. This is useful if you want to do a computation on every icon:
@@ -76,18 +76,18 @@ The XML for each icon can be easily manipulated with either of two functions:
 `Icon.get_xml(**attrs) -> ElementTree`
 
 ```py
-from simpleicons.icons.simpleicons import simpleicons_icon
+from simpleicons.icons import si_simpleicons
 
 # blue logo, adds the fill attribute: <svg fill="blue"></svg>
-simpleicons_icon.get_xml(fill="blue")
+si_simpleicons.get_xml(fill="blue")
 ```
 
 `Icon.get_xml_bytes(**attrs) -> bytes`
 
 ```py
-from simpleicons.icons.simpleicons import simpleicons_icon
+from simpleicons.icons import si_simpleicons
 
-simpleicons_icon.get_xml_bytes(fill="blue")
+si_simpleicons.get_xml_bytes(fill="blue")
 ```
 
 ### Image
@@ -95,10 +95,10 @@ simpleicons_icon.get_xml_bytes(fill="blue")
 In order to use this, you must install the extras: `pip install -e simpleicons[imaging]` . Icons can be converted to PIL Images with `icon_to_image(icon_xml: bytes, bg: int=0xffffff, scale: Tuple[int, int]=(1, 1)) -> Image`:
 
 ```py
-from simpleicons.icons.simpleicons import simpleicons_icon
+from simpleicons.icons import si_simpleicons
 from simpleicons.image import icon_to_image
 
-xml_bytes = simpleicons_icon.get_xml_bytes(fill="blue")
+xml_bytes = si_simpleicons.get_xml_bytes(fill="blue")
 
 # black background and 5x scale
 img = icon_to_image(xml_bytes, bg=0x000000, scale=(5, 5))

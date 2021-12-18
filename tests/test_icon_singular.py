@@ -1,13 +1,10 @@
-# yes, this is quite confusing
-import importlib
-
-from simpleicons.icons.simpleicons import simpleicons_icon
-from simpleicons.icons.dotnet import dotnet_icon
+from simpleicons.all import icons
+from simpleicons.icons import si_dotnet
 
 
 def test_simpleicons():
-    assert simpleicons_icon.title == "Simple Icons"
+    assert icons["simpleicons"].title == "Simple Icons"
 
 
 def test_dot_net():
-    assert dotnet_icon.title == ".NET"
+    assert si_dotnet.title == ".NET"

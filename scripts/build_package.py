@@ -1,16 +1,15 @@
 import json
 import re
-import shutil
 from pathlib import Path
 
 from simpleicons.icon import License
 from scripts.utils import get_icon_slug, title_to_slug
 
 simpleicons_vendor_dir = Path("vendor", "simple-icons")
+simpleicons_source_dir = simpleicons_vendor_dir / "icons"
 data_file = simpleicons_vendor_dir / "_data" / "simple-icons.json"
 index_file = Path("simpleicons", "all.py")
-icons_dir = Path("simpleicons", "icons")
-simpleicons_source_dir = simpleicons_vendor_dir / "icons"
+icons_file = Path("simpleicons", "icons.py")
 
 templates_dir = Path("scripts", "templates")
 index_template_file = templates_dir / "all.py"
@@ -56,20 +55,14 @@ def icon_to_object(icon):
 
 
 def build():
-    # reset build
-    if icons_dir.exists() and icons_dir.is_dir():
-        shutil.rmtree(icons_dir)
-
-    icons_dir.mkdir()
-
-    data = None
-
     with open(data_file, "r") as f:
         data = json.load(f)
 
     icons = []
+    icon_assignments = []
     for icon in data["icons"]:
         icon["slug"] = get_icon_slug(icon)
+
         svg_filepath = Path(simpleicons_source_dir, f"{icon['slug']}.svg")
 
         with open(svg_filepath, "r") as f:
@@ -77,17 +70,23 @@ def build():
 
         icons.append(icon.copy())
 
-        py_filepath = Path(icons_dir, f"{icon['slug']}.py")
-        with open(py_filepath, "w") as f:
-            f.write(
-                f"from simpleicons.icon import Icon\n{icon['slug']}_icon= {icon_to_object(icon)}"
-            )
+        prelude = "from simpleicons.icon import Icon"
+        variable_name = f"si_{icon['slug']}"
+
+        icon_assignments.append(f"{variable_name} = {icon_to_object(icon)}")
 
     raw_init_py = index_template.format(
-        icons=str.join(",\n", [icon_to_key_value(icon) for icon in icons])
+        icons=",\n".join([icon_to_key_value(icon) for icon in icons])
     )
+
+    joined_icon_assignments = "\n".join(icon_assignments)
+    icons_py = f"{prelude}\n\n{joined_icon_assignments}"
+
     with open(index_file, "w") as f:
         f.write(raw_init_py)
+
+    with open(icons_file, "w") as f:
+        f.write(icons_py)
 
 
 if __name__ == "__main__":

@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # generated files
-simpleicons/icons
+simpleicons/icons.py
 simpleicons/all.py
 
 tests/**/*
