@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simpleicons"
-version = "6.18.0"
+version = "6.19.0"
 description = "Use a wide-range of icons derived from the simple-icons/simple-icons repo in python."
 authors = ["Sachin Raja <sachinraja2349@gmail.com>"]
 license = "MIT"
