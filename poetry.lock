@@ -735,13 +735,13 @@ files = [
 
 [[package]]
 name = "svglib"
-version = "1.1.0"
+version = "1.5.1"
 description = "A pure-Python library for reading and converting SVG"
 category = "main"
 optional = false
-python-versions = ">=3"
+python-versions = ">=3.7"
 files = [
-    {file = "svglib-1.1.0.tar.gz", hash = "sha256:520ee5290ee2ebeebd20ca0d7d995c08c903b364fcf515826bab43a1288d422e"},
+    {file = "svglib-1.5.1.tar.gz", hash = "sha256:3ae765d3a9409ee60c0fb4d24c2deb6a80617aa927054f5bcd7fc98f0695e587"},
 ]
 
 [package.dependencies]
