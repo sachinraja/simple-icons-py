@@ -22,7 +22,7 @@ new_si_version_str = new_si_pkg["dist-tags"]["latest"]
 new_si_version = semantic_version.Version(new_si_pkg["dist-tags"]["latest"])
 
 # do not attempt to update if major versions do not match
-#if current_si_version.major != new_si_version.major:
+# if current_si_version.major != new_si_version.major:
 #    print("Next update is major, exiting.")
 #    exit(1)
 
