@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 from simpleicons.icon import License
-from utils import get_icon_slug, title_to_slug
+from scripts.utils import get_icon_slug, title_to_slug
 
 simpleicons_vendor_dir = Path("vendor", "simple-icons")
 simpleicons_source_dir = simpleicons_vendor_dir / "icons"

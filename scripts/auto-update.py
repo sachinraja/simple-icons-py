@@ -7,7 +7,7 @@ import requests
 import semantic_version
 import git
 
-from build_package import build
+from scripts.build_package import build
 
 current_si_pkg = None
 with open(Path("vendor", "simple-icons", "package.json"), "r") as f:
