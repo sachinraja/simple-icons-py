@@ -64,9 +64,8 @@ Lastly, the `icons` object is also enumerable. This is useful if you want to do 
 ```py
 from simpleicons.all import icons
 
-for (key, icon in icons) {
+for key, icon in icons:
     # do stuff
-}
 ```
 
 ### XML
