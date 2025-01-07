@@ -22,9 +22,9 @@ new_si_version_str = new_si_pkg["dist-tags"]["latest"]
 new_si_version = semantic_version.Version(new_si_pkg["dist-tags"]["latest"])
 
 # do not attempt to update if major versions do not match
-if current_si_version.major != new_si_version.major:
-    print("Next update is major, exiting.")
-    exit(1)
+# if current_si_version.major != new_si_version.major:
+#    print("Next update is major, exiting.")
+#    exit(1)
 
 # version is lower or equal - exit
 if new_si_version <= current_si_version:
@@ -35,7 +35,7 @@ if new_si_version <= current_si_version:
 repo = git.Repo(os.getcwd())
 si_submodule = repo.submodule("vendor/simple-icons")
 si_submodule_repo = si_submodule.module()
-si_submodule_repo.remotes.origin.fetch("--tags")
+si_submodule_repo.remotes.origin.fetch("")
 
 si_submodule_repo.git.checkout(new_si_version_str)
 print(f"Checked out branch {new_si_version_str} of simple-icons in submodule.")
